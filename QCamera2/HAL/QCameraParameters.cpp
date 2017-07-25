@@ -522,6 +522,214 @@ const QCameraParameters::QCameraMap QCameraParameters::ANTIBANDING_MODES_MAP[] =
     { ANTIBANDING_AUTO, CAM_ANTIBANDING_MODE_AUTO }
 };
 
+/* Mapping from MCC to antibanding type */
+struct country_map {
+    uint32_t country_code;
+    cam_antibanding_mode_type type;
+};
+
+static struct country_map country_numeric[] = {
+    { 202, CAM_ANTIBANDING_MODE_50HZ }, // Greece
+    { 204, CAM_ANTIBANDING_MODE_50HZ }, // Netherlands
+    { 206, CAM_ANTIBANDING_MODE_50HZ }, // Belgium
+    { 208, CAM_ANTIBANDING_MODE_50HZ }, // France
+    { 212, CAM_ANTIBANDING_MODE_50HZ }, // Monaco
+    { 213, CAM_ANTIBANDING_MODE_50HZ }, // Andorra
+    { 214, CAM_ANTIBANDING_MODE_50HZ }, // Spain
+    { 216, CAM_ANTIBANDING_MODE_50HZ }, // Hungary
+    { 219, CAM_ANTIBANDING_MODE_50HZ }, // Croatia
+    { 220, CAM_ANTIBANDING_MODE_50HZ }, // Serbia
+    { 222, CAM_ANTIBANDING_MODE_50HZ }, // Italy
+    { 226, CAM_ANTIBANDING_MODE_50HZ }, // Romania
+    { 228, CAM_ANTIBANDING_MODE_50HZ }, // Switzerland
+    { 230, CAM_ANTIBANDING_MODE_50HZ }, // Czech Republic
+    { 231, CAM_ANTIBANDING_MODE_50HZ }, // Slovakia
+    { 232, CAM_ANTIBANDING_MODE_50HZ }, // Austria
+    { 234, CAM_ANTIBANDING_MODE_50HZ }, // United Kingdom
+    { 235, CAM_ANTIBANDING_MODE_50HZ }, // United Kingdom
+    { 238, CAM_ANTIBANDING_MODE_50HZ }, // Denmark
+    { 240, CAM_ANTIBANDING_MODE_50HZ }, // Sweden
+    { 242, CAM_ANTIBANDING_MODE_50HZ }, // Norway
+    { 244, CAM_ANTIBANDING_MODE_50HZ }, // Finland
+    { 246, CAM_ANTIBANDING_MODE_50HZ }, // Lithuania
+    { 247, CAM_ANTIBANDING_MODE_50HZ }, // Latvia
+    { 248, CAM_ANTIBANDING_MODE_50HZ }, // Estonia
+    { 250, CAM_ANTIBANDING_MODE_50HZ }, // Russian Federation
+    { 255, CAM_ANTIBANDING_MODE_50HZ }, // Ukraine
+    { 257, CAM_ANTIBANDING_MODE_50HZ }, // Belarus
+    { 259, CAM_ANTIBANDING_MODE_50HZ }, // Moldova
+    { 260, CAM_ANTIBANDING_MODE_50HZ }, // Poland
+    { 262, CAM_ANTIBANDING_MODE_50HZ }, // Germany
+    { 266, CAM_ANTIBANDING_MODE_50HZ }, // Gibraltar
+    { 268, CAM_ANTIBANDING_MODE_50HZ }, // Portugal
+    { 270, CAM_ANTIBANDING_MODE_50HZ }, // Luxembourg
+    { 272, CAM_ANTIBANDING_MODE_50HZ }, // Ireland
+    { 274, CAM_ANTIBANDING_MODE_50HZ }, // Iceland
+    { 276, CAM_ANTIBANDING_MODE_50HZ }, // Albania
+    { 278, CAM_ANTIBANDING_MODE_50HZ }, // Malta
+    { 280, CAM_ANTIBANDING_MODE_50HZ }, // Cyprus
+    { 282, CAM_ANTIBANDING_MODE_50HZ }, // Georgia
+    { 283, CAM_ANTIBANDING_MODE_50HZ }, // Armenia
+    { 284, CAM_ANTIBANDING_MODE_50HZ }, // Bulgaria
+    { 286, CAM_ANTIBANDING_MODE_50HZ }, // Turkey
+    { 288, CAM_ANTIBANDING_MODE_50HZ }, // Faroe Islands
+    { 290, CAM_ANTIBANDING_MODE_50HZ }, // Greenland
+    { 293, CAM_ANTIBANDING_MODE_50HZ }, // Slovenia
+    { 294, CAM_ANTIBANDING_MODE_50HZ }, // Macedonia
+    { 295, CAM_ANTIBANDING_MODE_50HZ }, // Liechtenstein
+    { 297, CAM_ANTIBANDING_MODE_50HZ }, // Montenegro
+    { 302, CAM_ANTIBANDING_MODE_60HZ }, // Canada
+    { 310, CAM_ANTIBANDING_MODE_60HZ }, // United States of America
+    { 311, CAM_ANTIBANDING_MODE_60HZ }, // United States of America
+    { 312, CAM_ANTIBANDING_MODE_60HZ }, // United States of America
+    { 313, CAM_ANTIBANDING_MODE_60HZ }, // United States of America
+    { 314, CAM_ANTIBANDING_MODE_60HZ }, // United States of America
+    { 315, CAM_ANTIBANDING_MODE_60HZ }, // United States of America
+    { 316, CAM_ANTIBANDING_MODE_60HZ }, // United States of America
+    { 330, CAM_ANTIBANDING_MODE_60HZ }, // Puerto Rico
+    { 334, CAM_ANTIBANDING_MODE_60HZ }, // Mexico
+    { 338, CAM_ANTIBANDING_MODE_50HZ }, // Jamaica
+    { 340, CAM_ANTIBANDING_MODE_50HZ }, // Martinique
+    { 342, CAM_ANTIBANDING_MODE_50HZ }, // Barbados
+    { 346, CAM_ANTIBANDING_MODE_60HZ }, // Cayman Islands
+    { 350, CAM_ANTIBANDING_MODE_60HZ }, // Bermuda
+    { 352, CAM_ANTIBANDING_MODE_50HZ }, // Grenada
+    { 354, CAM_ANTIBANDING_MODE_60HZ }, // Montserrat
+    { 362, CAM_ANTIBANDING_MODE_50HZ }, // Netherlands Antilles
+    { 363, CAM_ANTIBANDING_MODE_60HZ }, // Aruba
+    { 364, CAM_ANTIBANDING_MODE_60HZ }, // Bahamas
+    { 365, CAM_ANTIBANDING_MODE_60HZ }, // Anguilla
+    { 366, CAM_ANTIBANDING_MODE_50HZ }, // Dominica
+    { 368, CAM_ANTIBANDING_MODE_60HZ }, // Cuba
+    { 370, CAM_ANTIBANDING_MODE_60HZ }, // Dominican Republic
+    { 372, CAM_ANTIBANDING_MODE_60HZ }, // Haiti
+    { 401, CAM_ANTIBANDING_MODE_50HZ }, // Kazakhstan
+    { 402, CAM_ANTIBANDING_MODE_50HZ }, // Bhutan
+    { 404, CAM_ANTIBANDING_MODE_50HZ }, // India
+    { 405, CAM_ANTIBANDING_MODE_50HZ }, // India
+    { 410, CAM_ANTIBANDING_MODE_50HZ }, // Pakistan
+    { 413, CAM_ANTIBANDING_MODE_50HZ }, // Sri Lanka
+    { 414, CAM_ANTIBANDING_MODE_50HZ }, // Myanmar
+    { 415, CAM_ANTIBANDING_MODE_50HZ }, // Lebanon
+    { 416, CAM_ANTIBANDING_MODE_50HZ }, // Jordan
+    { 417, CAM_ANTIBANDING_MODE_50HZ }, // Syria
+    { 418, CAM_ANTIBANDING_MODE_50HZ }, // Iraq
+    { 419, CAM_ANTIBANDING_MODE_50HZ }, // Kuwait
+    { 420, CAM_ANTIBANDING_MODE_60HZ }, // Saudi Arabia
+    { 421, CAM_ANTIBANDING_MODE_50HZ }, // Yemen
+    { 422, CAM_ANTIBANDING_MODE_50HZ }, // Oman
+    { 424, CAM_ANTIBANDING_MODE_50HZ }, // United Arab Emirates
+    { 425, CAM_ANTIBANDING_MODE_50HZ }, // Israel
+    { 426, CAM_ANTIBANDING_MODE_50HZ }, // Bahrain
+    { 427, CAM_ANTIBANDING_MODE_50HZ }, // Qatar
+    { 428, CAM_ANTIBANDING_MODE_50HZ }, // Mongolia
+    { 429, CAM_ANTIBANDING_MODE_50HZ }, // Nepal
+    { 430, CAM_ANTIBANDING_MODE_50HZ }, // United Arab Emirates
+    { 431, CAM_ANTIBANDING_MODE_50HZ }, // United Arab Emirates
+    { 432, CAM_ANTIBANDING_MODE_50HZ }, // Iran
+    { 434, CAM_ANTIBANDING_MODE_50HZ }, // Uzbekistan
+    { 436, CAM_ANTIBANDING_MODE_50HZ }, // Tajikistan
+    { 437, CAM_ANTIBANDING_MODE_50HZ }, // Kyrgyz Rep
+    { 438, CAM_ANTIBANDING_MODE_50HZ }, // Turkmenistan
+    { 440, CAM_ANTIBANDING_MODE_60HZ }, // Japan
+    { 441, CAM_ANTIBANDING_MODE_60HZ }, // Japan
+    { 452, CAM_ANTIBANDING_MODE_50HZ }, // Vietnam
+    { 454, CAM_ANTIBANDING_MODE_50HZ }, // Hong Kong
+    { 455, CAM_ANTIBANDING_MODE_50HZ }, // Macao
+    { 456, CAM_ANTIBANDING_MODE_50HZ }, // Cambodia
+    { 457, CAM_ANTIBANDING_MODE_50HZ }, // Laos
+    { 460, CAM_ANTIBANDING_MODE_50HZ }, // China
+    { 466, CAM_ANTIBANDING_MODE_60HZ }, // Taiwan
+    { 470, CAM_ANTIBANDING_MODE_50HZ }, // Bangladesh
+    { 472, CAM_ANTIBANDING_MODE_50HZ }, // Maldives
+    { 502, CAM_ANTIBANDING_MODE_50HZ }, // Malaysia
+    { 505, CAM_ANTIBANDING_MODE_50HZ }, // Australia
+    { 510, CAM_ANTIBANDING_MODE_50HZ }, // Indonesia
+    { 514, CAM_ANTIBANDING_MODE_50HZ }, // East Timor
+    { 515, CAM_ANTIBANDING_MODE_60HZ }, // Philippines
+    { 520, CAM_ANTIBANDING_MODE_50HZ }, // Thailand
+    { 525, CAM_ANTIBANDING_MODE_50HZ }, // Singapore
+    { 530, CAM_ANTIBANDING_MODE_50HZ }, // New Zealand
+    { 535, CAM_ANTIBANDING_MODE_60HZ }, // Guam
+    { 536, CAM_ANTIBANDING_MODE_50HZ }, // Nauru
+    { 537, CAM_ANTIBANDING_MODE_50HZ }, // Papua New Guinea
+    { 539, CAM_ANTIBANDING_MODE_50HZ }, // Tonga
+    { 541, CAM_ANTIBANDING_MODE_50HZ }, // Vanuatu
+    { 542, CAM_ANTIBANDING_MODE_50HZ }, // Fiji
+    { 544, CAM_ANTIBANDING_MODE_60HZ }, // American Samoa
+    { 545, CAM_ANTIBANDING_MODE_50HZ }, // Kiribati
+    { 546, CAM_ANTIBANDING_MODE_50HZ }, // New Caledonia
+    { 548, CAM_ANTIBANDING_MODE_50HZ }, // Cook Islands
+    { 602, CAM_ANTIBANDING_MODE_50HZ }, // Egypt
+    { 603, CAM_ANTIBANDING_MODE_50HZ }, // Algeria
+    { 604, CAM_ANTIBANDING_MODE_50HZ }, // Morocco
+    { 605, CAM_ANTIBANDING_MODE_50HZ }, // Tunisia
+    { 606, CAM_ANTIBANDING_MODE_50HZ }, // Libya
+    { 607, CAM_ANTIBANDING_MODE_50HZ }, // Gambia
+    { 608, CAM_ANTIBANDING_MODE_50HZ }, // Senegal
+    { 609, CAM_ANTIBANDING_MODE_50HZ }, // Mauritania
+    { 610, CAM_ANTIBANDING_MODE_50HZ }, // Mali
+    { 611, CAM_ANTIBANDING_MODE_50HZ }, // Guinea
+    { 613, CAM_ANTIBANDING_MODE_50HZ }, // Burkina Faso
+    { 614, CAM_ANTIBANDING_MODE_50HZ }, // Niger
+    { 616, CAM_ANTIBANDING_MODE_50HZ }, // Benin
+    { 617, CAM_ANTIBANDING_MODE_50HZ }, // Mauritius
+    { 618, CAM_ANTIBANDING_MODE_50HZ }, // Liberia
+    { 619, CAM_ANTIBANDING_MODE_50HZ }, // Sierra Leone
+    { 620, CAM_ANTIBANDING_MODE_50HZ }, // Ghana
+    { 621, CAM_ANTIBANDING_MODE_50HZ }, // Nigeria
+    { 622, CAM_ANTIBANDING_MODE_50HZ }, // Chad
+    { 623, CAM_ANTIBANDING_MODE_50HZ }, // Central African Republic
+    { 624, CAM_ANTIBANDING_MODE_50HZ }, // Cameroon
+    { 625, CAM_ANTIBANDING_MODE_50HZ }, // Cape Verde
+    { 627, CAM_ANTIBANDING_MODE_50HZ }, // Equatorial Guinea
+    { 631, CAM_ANTIBANDING_MODE_50HZ }, // Angola
+    { 633, CAM_ANTIBANDING_MODE_50HZ }, // Seychelles
+    { 634, CAM_ANTIBANDING_MODE_50HZ }, // Sudan
+    { 636, CAM_ANTIBANDING_MODE_50HZ }, // Ethiopia
+    { 637, CAM_ANTIBANDING_MODE_50HZ }, // Somalia
+    { 638, CAM_ANTIBANDING_MODE_50HZ }, // Djibouti
+    { 639, CAM_ANTIBANDING_MODE_50HZ }, // Kenya
+    { 640, CAM_ANTIBANDING_MODE_50HZ }, // Tanzania
+    { 641, CAM_ANTIBANDING_MODE_50HZ }, // Uganda
+    { 642, CAM_ANTIBANDING_MODE_50HZ }, // Burundi
+    { 643, CAM_ANTIBANDING_MODE_50HZ }, // Mozambique
+    { 645, CAM_ANTIBANDING_MODE_50HZ }, // Zambia
+    { 646, CAM_ANTIBANDING_MODE_50HZ }, // Madagascar
+    { 647, CAM_ANTIBANDING_MODE_50HZ }, // France
+    { 648, CAM_ANTIBANDING_MODE_50HZ }, // Zimbabwe
+    { 649, CAM_ANTIBANDING_MODE_50HZ }, // Namibia
+    { 650, CAM_ANTIBANDING_MODE_50HZ }, // Malawi
+    { 651, CAM_ANTIBANDING_MODE_50HZ }, // Lesotho
+    { 652, CAM_ANTIBANDING_MODE_50HZ }, // Botswana
+    { 653, CAM_ANTIBANDING_MODE_50HZ }, // Swaziland
+    { 654, CAM_ANTIBANDING_MODE_50HZ }, // Comoros
+    { 655, CAM_ANTIBANDING_MODE_50HZ }, // South Africa
+    { 657, CAM_ANTIBANDING_MODE_50HZ }, // Eritrea
+    { 702, CAM_ANTIBANDING_MODE_60HZ }, // Belize
+    { 704, CAM_ANTIBANDING_MODE_60HZ }, // Guatemala
+    { 706, CAM_ANTIBANDING_MODE_60HZ }, // El Salvador
+    { 708, CAM_ANTIBANDING_MODE_60HZ }, // Honduras
+    { 710, CAM_ANTIBANDING_MODE_60HZ }, // Nicaragua
+    { 712, CAM_ANTIBANDING_MODE_60HZ }, // Costa Rica
+    { 714, CAM_ANTIBANDING_MODE_60HZ }, // Panama
+    { 722, CAM_ANTIBANDING_MODE_50HZ }, // Argentina
+    { 724, CAM_ANTIBANDING_MODE_60HZ }, // Brazil
+    { 730, CAM_ANTIBANDING_MODE_50HZ }, // Chile
+    { 732, CAM_ANTIBANDING_MODE_60HZ }, // Colombia
+    { 734, CAM_ANTIBANDING_MODE_60HZ }, // Venezuela
+    { 736, CAM_ANTIBANDING_MODE_50HZ }, // Bolivia
+    { 738, CAM_ANTIBANDING_MODE_60HZ }, // Guyana
+    { 740, CAM_ANTIBANDING_MODE_60HZ }, // Ecuador
+    { 742, CAM_ANTIBANDING_MODE_50HZ }, // French Guiana
+    { 744, CAM_ANTIBANDING_MODE_50HZ }, // Paraguay
+    { 746, CAM_ANTIBANDING_MODE_60HZ }, // Suriname
+    { 748, CAM_ANTIBANDING_MODE_50HZ }, // Uruguay
+    { 750, CAM_ANTIBANDING_MODE_50HZ }, // Falkland Islands
+};
+
+#define country_number (sizeof(country_numeric) / sizeof(country_map))
+
 const QCameraParameters::QCameraMap QCameraParameters::ISO_MODES_MAP[] = {
     { ISO_AUTO,  CAM_ISO_MODE_AUTO },
     { ISO_HJR,   CAM_ISO_MODE_AUTO }, // ISO DEBLUR is broken in the backend
@@ -5863,9 +6071,19 @@ int QCameraParameters::getAutoFlickerMode()
            CAM_ANTIBANDING_MODE_AUTO_60HZ
       Currently setting it to default    */
     char prop[PROPERTY_VALUE_MAX];
+    char mcc_str[PROPERTY_VALUE_MAX];
+    uint32_t mcc, i;
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.set.afd", prop, "3");
-    return atoi(prop);
+    memset(mcc_str, 0, sizeof(mcc_str));
+    property_get("gsm.operator.numeric", prop, NULL);
+    if (prop == NULL)
+        return CAM_ANTIBANDING_MODE_60HZ;
+    memcpy(mcc_str, prop, 3);
+    mcc = atoi(mcc_str);
+    for (i = 0; i < country_number; i++)
+        if (country_numeric[i].country_code == mcc)
+            return country_numeric[i].type;
+        return CAM_ANTIBANDING_MODE_60HZ;
 }
 
 /*===========================================================================
